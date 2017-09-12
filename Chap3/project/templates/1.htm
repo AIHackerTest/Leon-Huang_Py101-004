@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" >
+  <title>天气查询系统</title>
+</head>
+
+<body>
+  <h1 style="text-align:center">天气查询系统</h1>
+
+  <form action="" method="post">
+    <p style="text-align:center">
+      城市：<input type="text" name="city">
+      <input name="action" type="submit" value="查询">
+      <input name="action" type="submit" value="历史">
+      <input name="action" type="submit" value="帮助">
+    </p>
+  </form>
+
+  {% if city %}
+  <h3>您输入的城市为：{{city}} </h3>
+  {% endif %}
+
+  {% if weather %}
+    <p>
+      城市：{{ weather['results'][0]['location']['name']}}<br>
+      天气：{{ weather['results'][0]['now']['text'] }}<br>
+      温度：{{ weather['results'][0]['now']['temperature']}}<br>
+    </p>
+  {% endif %}
+
+  {% if history %}
+    {% for h in history %}
+      <li>{{h[0]}}, {{h[1]}}, {{h[2]}}℃</li>
+    {% endfor %}
+  {% endif %}
+
+  {% if helps %}
+    <ul>
+      <li>输入城市名称进行查询</li>
+      <li>「历史」查看查询记录</li>
+      <li>「帮助」查看帮助文档</li>
+    </ul>
+  {% endif %}
+
+  {% if error %}
+    <h3>城市名称错误！</h3>
+  {% endif %}
+
+</body>
+</html>

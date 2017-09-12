@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>天气查询系统</title>
+</head>
+
+<body>
+  <h1 style="text-align:center">天气查询系统</h1>
+  <form action="" method="post">
+    <p style="text-align:center">
+      城市：<input type="text" name="city">
+      <input name="action" type="submit" value="查询">
+      <input name="action" type="submit" value="历史">
+      <input name="action" type="submit" value="帮助">
+    </p>
+  </form>
+
+  {% if error %}
+  <p style="text-align:center">
+    <br>没有该城市信息</br>
+  </p>
+  {% endif %}
+
+  {% if weather %}
+  <h2 style="text-align:center">{{ weather.city }}</h2>
+  <p style="text-align:center">
+    <br>天气：{{ weather.cond_txt }}</br>
+    <br>风向：{{ weather.wind_dir }}</br>
+    <br>温度：{{ weather.tmp }}°C</br>
+  </p>
+  {% endif %}
+
+  {% if history %}
+  <h2 style="text-align:center">历史查询信息</h2>
+  <p style="text-align:center">
+      {% for item in history %}
+      <br>
+        {{ item.city }}的天气为{{ item.cond_txt }}，风向为{{ item.wind_dir }}，温度为{{ item.tmp }}°C
+      </br>
+      {% endfor %}
+  </p>
+  {% endif %}
+
+  {% if get_help %}
+  <p style="text-align:center">
+    <br>输入城市名，查询该城市的天气；</br>
+    <br>点击帮助，获取帮助文档；</br>
+    <br>点击历史，获取查询历史。</br>
+  </p>
+  {% endif %}
+</body>
+</html>
